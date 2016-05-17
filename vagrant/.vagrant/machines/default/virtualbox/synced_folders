@@ -1,0 +1,1 @@
+{"virtualbox":{"/app":{"guestpath":"/app","hostpath":"/home/luke/Projects/music-share","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"/home/luke/Projects/music-share/vagrant","disabled":false,"__vagrantfile":true}}}
