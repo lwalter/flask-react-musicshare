@@ -2,4 +2,10 @@ env
 __pycache__
 node_modules
 *logs
+*log
 .vagrant
+app/static/dist/*
+*pyc
+hostenv
+.idea
+*.db
