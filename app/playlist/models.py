@@ -19,7 +19,7 @@ class Playlist(BaseRecordMixin, CRUDMixin, db.Model):
     __tablename__ = 'playlist'
 
     title = db.Column(db.String, nullable=False)
-    songs = db.relationship('PlaylistSong', cascade='all, delete-orphan', backref='playlist')
+    playlist_songs = db.relationship('PlaylistSong', cascade='all, delete-orphan', backref='playlist')
 
     def __init__(self, title):
         super().__init__()

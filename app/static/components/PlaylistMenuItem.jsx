@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { NavItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 class PlaylistMenuItem extends React.Component {
   constructor(props) {
@@ -9,9 +11,9 @@ class PlaylistMenuItem extends React.Component {
   render() {
     const playlistUrl = "/playlist/" + this.props.playlist;
     return (
-      <li>
-        <Link to={playlistUrl}>{this.props.children}</Link>
-      </li>
+      <LinkContainer to={playlistUrl}>
+        <NavItem eventKey={this.props.playlist}>{this.props.children}</NavItem>
+      </LinkContainer> 
     )
   }
 }

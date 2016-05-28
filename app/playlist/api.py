@@ -47,7 +47,7 @@ class PlaylistSongAPI(Resource):
             current_app.logger.error(str(e))
             return {'message': 'Something went wrong.'}, 500
 
-        return {'songs': [song.serialize() for song in playlist.songs]}, 200
+        return {'songs': [playlist_song.song.serialize() for playlist_song in playlist.playlist_songs]}, 200
 
     def post(self, playlist_id):
         try:
@@ -75,7 +75,7 @@ class PlaylistSongAPI(Resource):
                 return {'message': 'Song already exists.'}, 409
 
             playlist_song = PlaylistSong(song)
-            playlist.songs.append(playlist_song)
+            playlist.playlist_songs.append(playlist_song)
             playlist.save()
         except Exception as e:
             current_app.logger.error(str(e))

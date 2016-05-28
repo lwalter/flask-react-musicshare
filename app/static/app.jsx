@@ -1,8 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, hashHistory } from 'react-router';
+import { PageHeader, Grid, Row, Col } from 'react-bootstrap';
 
-// Import components
+// / Import components
 import Playlist from './components/Playlist.jsx';
 import PlaylistMenu from './components/PlaylistMenu.jsx';
 import PlaylistForm from './components/PlaylistForm.jsx';
@@ -15,14 +16,19 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <div>
-          <h1>Welcome to MusicShare</h1>
-          <h4>Share your music with friends from any music provider</h4> 
-        </div>
-        <div>
-          <PlaylistMenu/>
-        </div>
-        {this.props.children}
+        <PageHeader>
+          MusicShare <small>Share your music with friends from any music provider</small>
+        </PageHeader>
+        <Grid>
+          <Row>
+            <Col md={2}>
+              <PlaylistMenu/>
+            </Col>
+            <Col md={10}>
+              {this.props.children}
+            </Col>
+          </Row>
+        </Grid> 
       </div>
     )
   }

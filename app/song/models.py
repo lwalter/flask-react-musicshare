@@ -23,7 +23,6 @@ class Song(BaseRecordMixin, CRUDMixin, db.Model):
     def serialize(self):
         return {
             'id': self.id,
-            'created_at': self.created_at,
             'title': self.title,
             'artist': self.artist,
             'spotify_id': self.spotify_id,

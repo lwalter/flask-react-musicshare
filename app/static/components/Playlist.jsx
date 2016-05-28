@@ -2,6 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import SongListItem from './SongListItem.jsx';
 import SongForm from './SongForm.jsx';
+import { ListGroup } from 'react-bootstrap';
 
 class Playlist extends React.Component {
   constructor(props) {
@@ -26,6 +27,15 @@ class Playlist extends React.Component {
     });
 
     return request;
+  }
+
+  componentDidUpdate(prevProps) {
+    var prevPlaylistId = prevProps.params.playlistId;
+    var currPlaylistId = this.props.params.playlistId;
+
+    if (prevPlaylistId !== currPlaylistId) {
+      this.serverRequest = this.loadSongs();
+    }
   }
 
   componentDidMount() {
@@ -60,7 +70,10 @@ class Playlist extends React.Component {
 
     return (
       <div>
-        {songs}
+        <h3>Songs</h3>
+        <ListGroup>
+          {songs}
+        </ListGroup>
         <SongForm playlist={this.props.params.playlistId}/>
       </div>
     )

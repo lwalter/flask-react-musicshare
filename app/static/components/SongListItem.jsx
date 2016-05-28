@@ -1,4 +1,5 @@
 import React from 'react';
+import { ListGroupItem } from 'react-bootstrap';
 
 class SongListItem extends React.Component {
   constructor(props) {
@@ -7,10 +8,12 @@ class SongListItem extends React.Component {
   
   render() {
     return (
-      <li>
-        <span>{this.props.song.title}: {this.props.song.artist}</span>
-        <button onClick={this.props.deleteSong}>Delete song</button>
-      </li>
+      <ListGroupItem header={this.props.song.title}>
+        <span>
+          {this.props.song.artist}
+          <button onClick={this.props.deleteSong}>Delete song</button>
+        </span>
+      </ListGroupItem>
     )
   }
 }
