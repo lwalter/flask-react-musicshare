@@ -12,3 +12,4 @@ A music sharing application that allows users to link song from various streamin
 * Better data api than jquery
 * Testing
 * Wrap up data CRUD
+* Make layout responsive

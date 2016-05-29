@@ -19,7 +19,7 @@ class App extends React.Component {
         <PageHeader>
           MusicShare <small>Share your music with friends from any music provider</small>
         </PageHeader>
-        <Grid>
+        <Grid fluid={true}>
           <Row>
             <Col md={2}>
               <PlaylistMenu/>

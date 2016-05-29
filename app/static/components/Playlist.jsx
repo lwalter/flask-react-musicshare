@@ -1,14 +1,15 @@
 import React from 'react';
 import $ from 'jquery';
 import SongListItem from './SongListItem.jsx';
+import { ListGroup, Button, Row, Col } from 'react-bootstrap';
 import SongForm from './SongForm.jsx';
-import { ListGroup } from 'react-bootstrap';
 
 class Playlist extends React.Component {
   constructor(props) {
     super(props);
     this.state = ({
-      songs: []
+      songs: [],
+      openSongSearch: false
     });
   }
   
@@ -48,17 +49,25 @@ class Playlist extends React.Component {
   
   deleteSongListItem(songId, e) {
     e.preventDefault();
-    
+
     $.ajax({
       url: '/api',
       success: (data) => {
         var songs = this.state.songs.filter((song) => {
           return songId !== song.id;
         });
-        
+
         this.setState({songs: songs});
       }
     });
+  }
+
+  openSongSearch() {
+    this.setState({ openSongSearch: true });
+  }
+  
+  closeSongSearch() {
+    this.setState({ openSongSearch: false });
   }
   
   render() {
@@ -70,11 +79,22 @@ class Playlist extends React.Component {
 
     return (
       <div>
-        <h3>Songs</h3>
-        <ListGroup>
-          {songs}
-        </ListGroup>
-        <SongForm playlist={this.props.params.playlistId}/>
+        <Row>
+          <Col md={8}>
+            <h3>Songs</h3>
+          </Col>
+          <Col md={4}>
+            <Button onClick={this.openSongSearch.bind(this)} bsStyle="primary">Add a song</Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={12}>
+            <ListGroup>
+              {songs}
+            </ListGroup>
+          </Col>
+        </Row>
+        <SongForm playlist={this.props.params.playlistId} show={this.state.openSongSearch} hide={this.closeSongSearch.bind(this)} />
       </div>
     )
   }

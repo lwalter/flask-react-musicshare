@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListGroupItem } from 'react-bootstrap';
+import { ListGroupItem, Button } from 'react-bootstrap';
 
 class SongListItem extends React.Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class SongListItem extends React.Component {
       <ListGroupItem header={this.props.song.title}>
         <span>
           {this.props.song.artist}
-          <button onClick={this.props.deleteSong}>Delete song</button>
+          <Button onClick={this.props.deleteSong} bsStyle="primary">Delete song</Button>
         </span>
       </ListGroupItem>
     )

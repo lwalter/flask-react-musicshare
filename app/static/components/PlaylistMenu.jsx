@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import { Link } from 'react-router';
-import { Nav, NavItem, Navbar } from 'react-bootstrap';
+import { Nav, NavItem, Navbar, Row, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import PlaylistMenuItem from './PlaylistMenuItem.jsx';
 
@@ -49,15 +49,21 @@ class PlaylistMenu extends React.Component {
     
     return (
       <div>
-        <Navbar.Header>
-          <Navbar.Brand>Playlists</Navbar.Brand>
-        </Navbar.Header>
-        <Nav bsStyle="pills" pullLeft stacked activeKey={1}>
-          {playlists}
-          <LinkContainer to="/create-playlist">
-            <NavItem eventKey={createPlaylistKey}>Create a new playlist</NavItem>
-          </LinkContainer>
-        </Nav>
+        <Row>
+          <Col md={12}>
+            <h3>Playlists</h3>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={12}>
+            <Nav bsStyle="pills" pullLeft stacked activeKey={1}>
+              {playlists}
+              <LinkContainer to="/create-playlist">
+                <NavItem eventKey={createPlaylistKey}>Create a new playlist</NavItem>
+              </LinkContainer>
+            </Nav>
+          </Col>
+        </Row>
       </div>
     )
   }

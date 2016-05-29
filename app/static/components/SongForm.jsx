@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import { Button, Modal } from 'react-bootstrap';
 
 class SongForm extends React.Component {
   constructor(props) {
@@ -63,14 +64,23 @@ class SongForm extends React.Component {
 
   render () {
     return (
-      <form onSubmit={this.submitSong}>
-        <label for="title">Title</label>
-        <input name="title" type="text" value={this.state.title} onChange={this.handleTitleChange}/>
-        <p>Or..</p>
-        <label for="url">Url</label>
-        <input name="url" type="text" value={this.state.url} onChange={this.handleUrlChange}/>
-        <button type="submit">Add song</button>
-      </form>
+      <Modal show={this.props.show} onHide={this.props.hide}>
+        <Modal.Header closeButton>
+          <Modal.Title>Search for a song</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form onSubmit={this.submitSong}>
+            <label for="title">Title</label>
+            <input name="title" type="text" value={this.state.title} onChange={this.handleTitleChange}/>
+            <p>Or..</p>
+            <label for="url">Url</label>
+            <input name="url" type="text" value={this.state.url} onChange={this.handleUrlChange}/>
+          </form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button type="submit" bsStyle="primary">Add song</Button>
+        </Modal.Footer>
+      </Modal>
     );
   }
 }
