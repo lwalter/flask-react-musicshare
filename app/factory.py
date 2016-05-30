@@ -20,6 +20,9 @@ def create_app(config=None):
     from app.home.views import home
     app.register_blueprint(home)
 
+    from app.song.api import songsearch
+    app.register_blueprint(songsearch)
+
     from app.song.api import SongAPI, SongsAPI
     api.add_resource(SongAPI, '/api/song')
     api.add_resource(SongsAPI, '/api/songs')

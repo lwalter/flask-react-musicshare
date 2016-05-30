@@ -1,7 +1,8 @@
 from flask_restful import Resource, reqparse
 from app.song.models import Song
-from flask import current_app
+from flask import current_app, Blueprint, request, jsonify
 from sqlalchemy.exc import IntegrityError
+from app.song.utils import SongUtils
 
 
 class SongAPI(Resource):
@@ -52,3 +53,25 @@ class SongsAPI(Resource):
             return {'message': 'Something went wrong.'}, 500
 
         return {'songs', [song.serialize() for song in songs]}
+
+
+songsearch = Blueprint('songsearch', __name__)
+
+
+@songsearch.route('/songs/search', methods=['POST'])
+def search():
+    title = request.form.get('title')
+
+    if not title or title == '':
+        return jsonify(message='Something went wrong')
+
+     # Query spotify api
+    try:
+        results = SongUtils.query_songs(title)
+    except Exception as e:
+        print(str(e))
+        return jsonify(message='Something went wrong')
+
+    # Might need to do some extra parsing either here or in the utils method
+    return jsonify(results)
+

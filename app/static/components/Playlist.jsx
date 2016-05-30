@@ -76,6 +76,9 @@ class Playlist extends React.Component {
         <SongListItem song={song} deleteSong={this.deleteSongListItem.bind(this, song.id)} key={song.id}/>
       );
     });
+    
+    var songElement = (!!songs && Array.isArray(songs) && songs.length > 0)
+      ? (<ListGroup>{songs}</ListGroup>) : (<h2>You don't have any songs in this playlist</h2>);
 
     return (
       <div>
@@ -89,9 +92,7 @@ class Playlist extends React.Component {
         </Row>
         <Row>
           <Col md={12}>
-            <ListGroup>
-              {songs}
-            </ListGroup>
+            {songElement}
           </Col>
         </Row>
         <SongForm playlist={this.props.params.playlistId} show={this.state.openSongSearch} hide={this.closeSongSearch.bind(this)} />

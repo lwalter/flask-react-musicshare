@@ -1,13 +1,15 @@
 import React from 'react';
 import $ from 'jquery';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal, Row, Col, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import SongSearchResults from './SongSearchResults.jsx';
 
 class SongForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = ({
       url: '',
-      title: ''
+      title: '',
+      searchResults: []
     });
     this.handleUrlChange = this.handleUrlChange.bind(this);
     this.handleTitleChange = this.handleTitleChange.bind(this);
@@ -22,9 +24,41 @@ class SongForm extends React.Component {
   handleUrlChange(e) {
     this.setState({ url: e.target.value });
   }
-
-  submitSong(e) {
+  
+  querySongs(e) {
     e.preventDefault();
+    
+    const title = this.state.title;
+    
+    if (!title || typeof title !== 'string' || title === '') {
+      return;
+    }
+    
+    $.ajax({
+      url: 'songs/search',
+      dataType: 'json',
+      method: 'POST',
+      data: { title: title },
+      success: (response) => {
+        console.log(response);
+        this.setState({ searchResults: response.tracks.items });
+      },
+      error: (xhr, status, err) => {
+        console.log(err);
+      }
+    });
+  }
+  
+  closeSongForm() {
+    this.setState({
+      searchResults: [],
+      title: '',
+      url: ''
+    });
+    this.props.hide();
+  }
+
+  submitSong() {
     var url = this.state.url;
     var title = this.state.title;
     
@@ -64,22 +98,33 @@ class SongForm extends React.Component {
 
   render () {
     return (
-      <Modal show={this.props.show} onHide={this.props.hide}>
+      <Modal show={this.props.show} onHide={this.closeSongForm.bind(this)}>
         <Modal.Header closeButton>
           <Modal.Title>Search for a song</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form onSubmit={this.submitSong}>
-            <label for="title">Title</label>
-            <input name="title" type="text" value={this.state.title} onChange={this.handleTitleChange}/>
-            <p>Or..</p>
-            <label for="url">Url</label>
-            <input name="url" type="text" value={this.state.url} onChange={this.handleUrlChange}/>
+          <form>
+            <FormGroup controlId="searchForm">
+              <Row>
+                <Col md={5}>
+                  <FormControl name="title" placeholder="Enter song title" type="text" value={this.state.title} onChange={this.handleTitleChange}/>
+                </Col>
+                <Col md={2}>
+                  <p>Or..</p>
+                </Col>
+                <Col md={5}>
+                  <FormControl name="url" placeholder="Enter YouTube url" type="text" value={this.state.url} onChange={this.handleUrlChange}/>
+                </Col>
+              </Row>
+            </FormGroup>
+            <Button bsStyle="primary" onClick={this.querySongs.bind(this)}>Search</Button>
           </form>
+          <Row>
+            <Col md={12}>
+              <SongSearchResults songs={this.state.searchResults} submitSong={this.submitSong.bind(this)} />
+            </Col>
+          </Row>
         </Modal.Body>
-        <Modal.Footer>
-          <Button type="submit" bsStyle="primary">Add song</Button>
-        </Modal.Footer>
       </Modal>
     );
   }

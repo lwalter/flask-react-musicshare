@@ -35,3 +35,18 @@ class SongUtils:
             raise Exception('Could not resolve Spotify id.')
 
         return track_id
+
+    @staticmethod
+    def query_songs(title):
+        if not title or title == '':
+            raise Exception('Must supply a title')
+
+        try:
+            spotify = spotipy.Spotify()
+            results = spotify.search(q=title, limit=10, type='track')
+        except Exception as e:
+            current_app.logger.info(str(e))
+            raise Exception('Could not query songs.')
+
+        return results
+
