@@ -1,18 +1,23 @@
 import React from 'react';
 import $ from 'jquery';
 import { FormGroup, Button, FormControl, Row, Col } from 'react-bootstrap'; // eslint-disable-line no-unused-vars
+import { connect } from 'react-redux';
+import { addPlaylist } from '../actions/ActionCreators.jsx';
+import store from '../store/Store.jsx';
 
 class PlaylistForm extends React.Component {
   constructor() {
     super();
-    this.state = { title: '' }; 
+    //this.state = { title: '' }; 
   }
  
   handleTitleChange(e) {
-    this.setState({ title: e.target.value });
+    //this.setState({ title: e.target.value });
   }
   
   submitPlaylist(e) {
+    store.dispatch(addPlaylist(this.state.title));
+    /*
     e.preventDefault();
     var title = this.state.title;
     
@@ -32,8 +37,9 @@ class PlaylistForm extends React.Component {
         console.log('Error');
       }
     });
+    */
     
-    this.setState({ title: '' });
+    //this.setState({ title: '' });
   }
   
   render() {
@@ -56,4 +62,4 @@ class PlaylistForm extends React.Component {
   }
 }
 
-export default PlaylistForm;
+export default connect()(PlaylistForm);
