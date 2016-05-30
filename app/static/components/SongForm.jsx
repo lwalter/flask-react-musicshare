@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
-import { Button, Modal, Row, Col, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
-import SongSearchResults from './SongSearchResults.jsx';
+import { Button, Modal, Row, Col, FormGroup, FormControl } from 'react-bootstrap'; // eslint-disable-line no-unused-vars
+import SongSearchResults from './SongSearchResults.jsx'; // eslint-disable-line no-unused-vars
 
 class SongForm extends React.Component {
   constructor(props) {
@@ -24,16 +24,16 @@ class SongForm extends React.Component {
   handleUrlChange(e) {
     this.setState({ url: e.target.value });
   }
-  
+
   querySongs(e) {
     e.preventDefault();
-    
+
     const title = this.state.title;
-    
+
     if (!title || typeof title !== 'string' || title === '') {
       return;
     }
-    
+
     $.ajax({
       url: 'songs/search',
       dataType: 'json',
@@ -48,7 +48,7 @@ class SongForm extends React.Component {
       }
     });
   }
-  
+
   closeSongForm() {
     this.setState({
       searchResults: [],
@@ -61,7 +61,7 @@ class SongForm extends React.Component {
   submitSong() {
     var url = this.state.url;
     var title = this.state.title;
-    
+
     if (!url && !title) {
       return;
     }

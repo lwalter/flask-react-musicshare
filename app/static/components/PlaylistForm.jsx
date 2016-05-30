@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import { FormGroup, Button, FormControl, Row, Col } from 'react-bootstrap'; // eslint-disable-line no-unused-vars
 
 class PlaylistForm extends React.Component {
   constructor() {
@@ -37,11 +38,20 @@ class PlaylistForm extends React.Component {
   
   render() {
     return (
-      <form onSubmit={this.submitPlaylist.bind(this)}>
-        <label for="title">Title</label>
-        <input name="title" type="text" value={this.state.title} onChange={this.handleTitleChange.bind(this)}/>
-        <button type="submit">Add playlist</button>
-      </form>
+      <div>
+        <Row>
+          <Col md={4}>
+            <h2>Create a new playlist</h2>
+            <form onSubmit={this.submitPlaylist.bind(this)}>
+              <FormGroup controlId="playlistForm">
+                <FormControl name="title" placeholder="Enter playlist title" type="text" required value={this.state.title} onChange={this.handleTitleChange.bind(this)}/>
+                <FormControl.Feedback />
+              </FormGroup>
+              <Button type="submit">Add playlist</Button>
+            </form>
+          </Col>
+        </Row>
+      </div>
     )
   }
 }

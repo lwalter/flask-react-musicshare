@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListGroupItem, Button } from 'react-bootstrap';
+import { ListGroupItem, Button } from 'react-bootstrap'; // eslint-disable-line no-unused-vars
 
 class SongListItem extends React.Component {
   constructor(props) {

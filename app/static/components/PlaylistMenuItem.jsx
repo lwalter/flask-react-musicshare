@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router';
-import { NavItem } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router'; // eslint-disable-line no-unused-vars
+import { NavItem } from 'react-bootstrap'; // eslint-disable-line no-unused-vars
+import { LinkContainer } from 'react-router-bootstrap'; // eslint-disable-line no-unused-vars
 
 class PlaylistMenuItem extends React.Component {
   constructor(props) {
