@@ -5,7 +5,7 @@ import { routerReducer } from 'react-router-redux';
 
 let store = createStore(
   combineReducers({
-    playlists,
+    playlists: playlists,
     routing: routerReducer
   }), 
   initialState, 

@@ -8,14 +8,15 @@ import store from '../store/Store.jsx';
 class PlaylistForm extends React.Component {
   constructor() {
     super();
-    //this.state = { title: '' }; 
+    this.state = { title: '' };
   }
  
   handleTitleChange(e) {
-    //this.setState({ title: e.target.value });
+    this.setState({ title: e.target.value });
   }
   
   submitPlaylist(e) {
+    e.preventDefault();
     store.dispatch(addPlaylist(this.state.title));
     /*
     e.preventDefault();
@@ -39,7 +40,7 @@ class PlaylistForm extends React.Component {
     });
     */
     
-    //this.setState({ title: '' });
+    this.setState({ title: '' });
   }
   
   render() {
