@@ -1,14 +1,15 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import playlists from '../reducers/Playlists.jsx';
-import initialState from './InitialState.jsx';
 import { routerReducer } from 'react-router-redux';
+import createLogger from 'redux-logger';
 
+let logger = createLogger();
 let store = createStore(
   combineReducers({
-    playlists: playlists,
+    playlistReducer: playlists,
     routing: routerReducer
-  }), 
-  initialState, 
-  window.devToolsExtension && window.devToolsExtension()
+  }),
+  applyMiddleware(logger)
 );
+
 export default store;
