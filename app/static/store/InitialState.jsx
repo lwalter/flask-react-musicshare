@@ -1,5 +1,6 @@
 const initialState = {
-  playlists: []
+  playlists: [],
+  errorMsg: ''
 };
 
 export default initialState;

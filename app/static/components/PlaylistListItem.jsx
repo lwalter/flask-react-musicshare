@@ -18,4 +18,8 @@ class PlaylistMenuItem extends React.Component {
   }
 }
 
+PlaylistMenuItem.propTypes = {
+  playlist: React.PropTypes.number.isRequired
+};
+
 export default PlaylistMenuItem;

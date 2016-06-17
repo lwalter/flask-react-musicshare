@@ -4,6 +4,8 @@ import SongListItem from './SongListItem.jsx'; // eslint-disable-line no-unused-
 import { ListGroup, Button, Row, Col } from 'react-bootstrap'; // eslint-disable-line no-unused-vars
 import SongForm from './SongForm.jsx'; // eslint-disable-line no-unused-vars
 
+
+// TODO(lnw) After error displaying is done work on this.
 class Playlist extends React.Component {
   constructor(props) {
     super(props);

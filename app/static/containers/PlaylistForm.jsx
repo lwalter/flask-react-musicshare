@@ -1,8 +1,8 @@
 import React from 'react';
-import $ from 'jquery';
 import { FormGroup, Button, FormControl, Row, Col } from 'react-bootstrap'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
-import { addPlaylist } from '../actions/ActionCreators.jsx';
+import { bindActionCreators } from 'redux';
+import { addPlaylist, postData, addPlaylistSuccess, addPlaylistError } from '../actions/ActionCreators.jsx';
 
 class PlaylistForm extends React.Component {
   constructor(props) {
@@ -16,28 +16,14 @@ class PlaylistForm extends React.Component {
   
   submitPlaylist(e) {
     e.preventDefault();
-    this.props.dispatch(addPlaylist(this.state.title));
-    /*
-    e.preventDefault();
-    var title = this.state.title;
+    this.props.actions.addPlaylist(this.state.title);
     
-    if (!title) {
-      return;
-    }
-    
-    $.ajax({
-      url: '/api/playlist',
-      dataType: 'json',
-      method: 'POST',
-      data: { title: title },
-      success: (data) => {
-        console.log('Success');
-      },
-      error: (xhr, status, err) => {
-        console.log('Error');
-      }
-    });
-    */
+    this.props.actions.postData(
+      '/api/playlist', 
+      { title: this.state.title },
+      addPlaylistSuccess,
+      addPlaylistError
+    );
     
     this.setState({ title: '' });
   }
@@ -50,7 +36,13 @@ class PlaylistForm extends React.Component {
             <h2>Create a new playlist</h2>
             <form onSubmit={this.submitPlaylist.bind(this)}>
               <FormGroup controlId="playlistForm">
-                <FormControl name="title" placeholder="Enter playlist title" type="text" required value={this.state.title} onChange={this.handleTitleChange.bind(this)}/>
+                <FormControl 
+                  name="title" 
+                  placeholder="Enter playlist title" 
+                  type="text" 
+                  required 
+                  value={this.state.title} 
+                  onChange={this.handleTitleChange.bind(this)}/>
                 <FormControl.Feedback />
               </FormGroup>
               <Button type="submit">Add playlist</Button>
@@ -62,4 +54,14 @@ class PlaylistForm extends React.Component {
   }
 }
 
-export default connect()(PlaylistForm);
+PlaylistForm.propTypes = {
+  actions: React.PropTypes.object.isRequired
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({ addPlaylist, postData }, dispatch)
+  }
+}
+
+export default connect(null, mapDispatchToProps)(PlaylistForm);

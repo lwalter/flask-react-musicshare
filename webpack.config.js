@@ -1,6 +1,6 @@
 module.exports = {
   entry: [
-    './app/static/App.jsx'
+    './app/static/Index.jsx'
   ],
   output: {
     path: './app/static/dist',

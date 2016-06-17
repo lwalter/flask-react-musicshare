@@ -1,17 +1,13 @@
 import * as types from '../constants/ActionTypes.jsx';
-import initialState from '../store/InitialState.jsx';
 
-export default function playlists(state = initialState, action) {
+export function playlists(state = [], action) {
   switch (action.type) {
+    case types.FETCH_PLAYLISTS:
+      return [...action.playlists];
+    
     case types.ADD_PLAYLIST:
-      return Object.assign({}, state, {
-        playlists: [
-          ...state.playlists,
-          {
-            title: action.title
-          }]
-      });
-      
+      return [...state, { title: action.title }];
+    
     default:
       return state;
   }
