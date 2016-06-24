@@ -11,7 +11,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchPlaylists: () => {
-      return dispatch(getData('/apii/playlists', fetchPlaylistsSuccessful, addError));
+      return dispatch(getData('/api/playlists', fetchPlaylistsSuccessful, addError));
     }
   };
 }

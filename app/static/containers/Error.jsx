@@ -17,7 +17,7 @@ class Error extends React.Component {
     return (
       <Alert bsStyle="danger">
         <h4>Uh oh, something went wrong...</h4>
-        {this.props.errorMsg}
+        <p>{this.props.errorMsg}</p>
         <Button onClick={this.removeError.bind(this)}>Dismiss</Button>
       </Alert>
     )
