@@ -1,6 +1,9 @@
 const initialState = {
+  playlistSongs: [],
   playlists: [],
-  errorMsg: ''
+  errorMsg: '',
+  playlistSongsLoading: false,
+  playlistsLoading: false
 };
 
 export default initialState;

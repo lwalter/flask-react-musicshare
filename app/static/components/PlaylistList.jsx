@@ -19,8 +19,10 @@ class PlaylistList extends React.Component {
         <PlaylistListItem playlist={playlist.id} key={playlist.id}>{playlist.title}</PlaylistListItem>
       )
     });
-
-    if (!!playlists && Array.isArray(playlists) && !playlists.length) {
+    
+    if (this.props.playlistsLoading) {
+      playlists = (<div>Loading...</div>);
+    } else if (!!playlists && Array.isArray(playlists) && !playlists.length) {
       playlists = (<div>No playlists found.</div>);
     }
     

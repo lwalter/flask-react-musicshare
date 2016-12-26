@@ -8,9 +8,14 @@ import store from './store/Store.jsx';
 import App from './containers/App.jsx'; // eslint-disable-line no-unused-vars
 import Playlist from './components/Playlist.jsx'; // eslint-disable-line no-unused-vars
 import PlaylistForm from './containers/PlaylistForm.jsx'; // eslint-disable-line no-unused-vars
+import Playlist1C from './containers/Playlist1C.jsx'; //eslint-disable-line no-unused-vars
 
 const history = syncHistoryWithStore(hashHistory, store);
 
+
+/*        <Route path="playlist/:playlistId" component={Playlist}/>*/
+
+// TODO(lnw) replace Playlist component with new Playist1 container
 render((
   <Provider store={store}>
     <Router history={history}>
